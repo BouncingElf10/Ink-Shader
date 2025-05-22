@@ -11,8 +11,7 @@
 //   | |_) | (_) | |_| | | | | (__| | | | | (_| | |____| | |  | | |_| |
 //   |____/ \___/ \__,_|_| |_|\___|_|_| |_|\__, |______|_|_|  |_|\___/
 //
-//   Feel free to make changes to any of the code (or steal it),
-//   but remember steal like an artist, not like a copier :c
+//   Feel free to make changes to any of the code (or steal it)
 //
 //   Check out more of my work on GitHub, Modrinth, Or Curseforge :)
 //
