@@ -11,8 +11,7 @@
 //   | |_) | (_) | |_| | | | | (__| | | | | (_| | |____| | |  | | |_| |
 //   |____/ \___/ \__,_|_| |_|\___|_|_| |_|\__, |______|_|_|  |_|\___/
 //
-//   Feel free to make changes to any of the code (or steal it),
-//   but remember steal like an artist, not like a copier :c
+//   Feel free to make changes to any of the code (or steal it)
 //
 //   Check out more of my work on GitHub, Modrinth, Or Curseforge :)
 //
@@ -27,7 +26,7 @@ uniform float thresholdLow = 0;
 uniform float thresholdHigh = 1;
 uniform float sigma;
 
-uniform float white = 1.0;
+uniform float white = 1.0f;
 uniform float black = BLACK_BRIGHTNESS;
 
 in vec2 texCoord;
@@ -53,17 +52,19 @@ vec4 edgeDetect(sampler2D tex, int depth) {
     float gradDir = atan(gradY, gradX);
     vec4 colorEdge;
     if (gradMag > thresholdHigh) {
-        colorEdge = vec4(vec3(black), 1.0); // Strong edge
+        return vec4(black, black, black, 1.0);
     } else {
-        colorEdge = vec4(vec3(white), 1.0); // Weak edge
+        return vec4(white, white, white, 1.0);
     }
-    return colorEdge;
 }
 
 void main() {
     vec2 res = textureSize(colortex0, 0);
     // Edge detect the color buffer and depth buffer
-    if ((edgeDetect(colortex0, 0).r != white || edgeDetect(depthtex0, 1) != white) && EDGE_DETECTION) {
+    vec4 colorEdgeDetect = edgeDetect(colortex0, 0);
+    vec4 depthEdgeDetect = edgeDetect(depthtex0, 1);
+
+    if ((colorEdgeDetect.r != white || depthEdgeDetect.r != white) && EDGE_DETECTION) {
         fragColor = vec4(vec3(black), 1.0);
     } else {
         //fragColor = vec4(vec3(white), 1.0);
